@@ -1,0 +1,35 @@
+{
+    "nav": {
+        "dashboard": "Dashboard",
+        "sales": "Reciepts",
+        "stockMenu": {
+            "stockMenu": "Stock",
+            "products": "Products",
+            "supply": "Stock Supply",
+            "store": "Store",
+            "load": "Team Load",
+            "return": "Team Return",
+            "damaged": "Damaged",
+            "emptyStore": "Empty Store"
+        },
+
+        "financeMenu": {
+            "financeMenu": "Finance",
+            "cashOut": "Cash Out",
+            "cashIn" : "Cash In"
+        }, 
+
+        "usersMenu": {
+            "userMenu": "Users",
+            "user": "Users",
+            "group": "Group"
+        },
+
+        "reportMenu":{
+            "reportMenu": "Reports",
+            "ristourne" : "Rebates"
+           
+        }
+
+    }
+}
