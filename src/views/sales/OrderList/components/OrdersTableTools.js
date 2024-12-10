@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import OrderDateRangeFilter from './OrderDateRangeFilter'
 import { apiExportRistourne } from 'services/SaleService'
+import moment from 'moment-timezone'
 
 // const BatchDeleteButton = () => {
 //     const dispatch = useDispatch()
@@ -27,7 +28,6 @@ import { apiExportRistourne } from 'services/SaleService'
 //     )
 // }
 
-
 const OrdersTableTools = () => {
     // const selectedRows = useSelector(
     //     (state) => state.salesOrderList.state.selectedRows
@@ -41,10 +41,13 @@ const OrdersTableTools = () => {
     const endDate = useSelector(
         (state) => state.salesOrderList.data.tableData.endDate
     )
+    const timeZone = 'Africa/Douala'
+    let s_date = moment.tz(startDate, timeZone).startOf('day').toISOString()
+    let e_date = moment.tz(endDate, timeZone).startOf('day').toISOString()
 
     const hanleExportRistourne = async () => {
         // console.log(sales);
-        const success = await apiExportRistourne({ sales, startDate, endDate })
+        const success = await apiExportRistourne({ sales, s_date, e_date })
         // Create a blob URL and a temporary download link
         const url = window.URL.createObjectURL(new Blob([success.data]))
         const link = document.createElement('a')
@@ -53,7 +56,6 @@ const OrdersTableTools = () => {
         document.body.appendChild(link)
         link.click()
         link.remove()
-        
     }
 
     const salesTopic = `Etat des ventes sur la period du
@@ -72,7 +74,7 @@ const OrdersTableTools = () => {
             Total_TTC: i.total_with_tax,
         }
     })
-    
+
     const handleSalesExport = (data, topic) => {
         const csvHeader = Object.keys(data[0]).join(';') + '\n'
         const csvRows = data
@@ -97,11 +99,13 @@ const OrdersTableTools = () => {
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">
             {/* {selectedRows.length > 0 && <BatchDeleteButton />} */}
             <Link onClick={hanleExportRistourne}>
-                <Button block  size="sm" icon={<HiDownload />}>
+                <Button block size="sm" icon={<HiDownload />}>
                     Ristournes
                 </Button>
             </Link>
-            <Link onClick={() => handleSalesExport(salesExportData, salesTopic)} >
+            <Link
+                onClick={() => handleSalesExport(salesExportData, salesTopic)}
+            >
                 <Button block size="sm" icon={<HiDownload />}>
                     Ventes
                 </Button>
