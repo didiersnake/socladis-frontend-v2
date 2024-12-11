@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import OrderDateRangeFilter from './OrderDateRangeFilter'
 import { apiExportRistourne } from 'services/SaleService'
-import moment from 'moment-timezone'
 
 // const BatchDeleteButton = () => {
 //     const dispatch = useDispatch()
@@ -41,13 +40,12 @@ const OrdersTableTools = () => {
     const endDate = useSelector(
         (state) => state.salesOrderList.data.tableData.endDate
     )
-    const timeZone = 'Africa/Douala'
-    let s_date = moment.tz(startDate, timeZone).startOf('day').toISOString()
-    let e_date = moment.tz(endDate, timeZone).startOf('day').toISOString()
+    // let s_date = new Date(startDate).setDate(new Date(startDate).getDate() + 1)
+    // let e_date = new Date(endDate).setDate(new Date(endDate).getDate() + 1)
 
     const hanleExportRistourne = async () => {
         // console.log(sales);
-        const success = await apiExportRistourne({ sales, s_date, e_date })
+        const success = await apiExportRistourne({ sales, startDate, endDate })
         // Create a blob URL and a temporary download link
         const url = window.URL.createObjectURL(new Blob([success.data]))
         const link = document.createElement('a')
