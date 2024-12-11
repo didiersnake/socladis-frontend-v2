@@ -22,24 +22,16 @@ const OrderDateRangeFilter = () => {
 
     const handleDateChange = (val)=> {
         const newTableData = cloneDeep(tableData)
-        // newTableData.startDate = val[0]
-        // newTableData.endDate = val[1]
-        if (val[0]) {
-            const startDate = new Date(val[0])
-            startDate.setDate(startDate.getDate() + 1) // Add 1 day to the start date
-            // newTableData.startDate = startDate.toISOString()
-            newTableData.startDate = startDate
-        }
-
-        if (val[1]) {
-            const endDate = new Date(val[1])
-            endDate.setDate(endDate.getDate() + 1) // Add 1 day to the end date
-            // newTableData.endDate = endDate.toISOString()
-            newTableData.endDate = endDate
-        }
+        newTableData.startDate = val[0]
+        newTableData.endDate = val[1]
         newTableData.pageIndex = 1
 
-        if (newTableData.startDate && newTableData.endDate) {
+        if (val[0] && val[1]) {
+            console.log(
+                new Date(newTableData.startDate).toLocaleDateString('en-GB')
+            )
+            console.log(newTableData.endDate)
+
             fetchData(newTableData)
         }
     }
