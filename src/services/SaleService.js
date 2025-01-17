@@ -8,6 +8,15 @@ export async function apiGetSalesOrders(data) {
     })
 }
 
+export async function apiGetCrmCustomersStatistic(params) {
+    return ApiService.fetchData({
+        url: '/api/customers-statistic',
+        method: 'get',
+        params,
+    })
+}
+
+
 export async function apiDeleteSalesOrders(data) {
     const {id} = data
     return ApiService.fetchData({

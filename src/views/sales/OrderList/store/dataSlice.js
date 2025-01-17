@@ -1,6 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import dayjs from 'dayjs'
-import { apiGetSalesOrders, apiDeleteSalesOrders, apiGetSalesByRange } from 'services/SaleService'
+import {
+    apiGetSalesOrders,
+    apiDeleteSalesOrders,
+    apiGetSalesByRange,
+    apiGetCrmCustomersStatistic,
+} from 'services/SaleService'
 
 export const getOrders = createAsyncThunk(
     'salesProductList/data/getOrders',
@@ -10,11 +15,20 @@ export const getOrders = createAsyncThunk(
     }
 )
 
+export const getCustomerStatistic = createAsyncThunk(
+    'salesProductList/data/getCustomerStatistic',
+    async () => {
+        const response = await apiGetCrmCustomersStatistic()
+        console.log(response)
+        return response.data
+    }
+)
+
 export const getOrdersByDateRange = createAsyncThunk(
     'salesProductList/data/getOrdersByRange',
     async (data) => {
         const response = await apiGetSalesByRange(data)
-        console.log(response.data);
+        console.log(response.data)
         return response.data
     }
 )
@@ -34,7 +48,7 @@ export const initialTableData = {
         key: '',
     },
     startDate: dayjs().subtract(3, 'month').toDate(),
-    endDate: new Date()
+    endDate: new Date(),
 }
 
 const dataSlice = createSlice({
@@ -42,6 +56,8 @@ const dataSlice = createSlice({
     initialState: {
         loading: false,
         orderList: [],
+        statisticData: {},
+        statisticLoading: false,
         orderByRange: [],
         tableData: initialTableData,
     },
@@ -68,6 +84,13 @@ const dataSlice = createSlice({
         },
         [getOrdersByDateRange.pending]: (state) => {
             state.loading = true
+        },
+        [getCustomerStatistic.loading]: (state) => {
+            state.statisticLoading = true
+        },
+        [getCustomerStatistic.fulfilled]: (state, action) => {
+            state.statisticData = action.payload
+            state.statisticLoading = false
         },
     },
 })

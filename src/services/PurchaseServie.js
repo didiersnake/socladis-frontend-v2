@@ -8,6 +8,15 @@ export async function apiGetPurchaseOrders(data) {
     })
 }
 
+export async function apiGetCrmCustomersStatistic(params) {
+    return ApiService.fetchData({
+        url: '/api/customers-statistic',
+        method: 'get',
+        params,
+    })
+}
+
+
 export async function apiGetPurchaseOrdersByRange(data) {
     return ApiService.fetchData({
         url: '/api/all/achats-by-range/',

@@ -42,17 +42,19 @@ const ProductTableTools = () => {
     }
 
     return (
-        <div className="flex flex-col lg:flex-row lg:items-center">
-            <ProductTableSearch />
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
             {/* <ProductFilter /> */}
             <Link
-                className="block lg:inline-block md:mx-2 md:mb-0 mb-4"
-                onClick={()=> handleSalesExport(userExportData, salesTopic)}
+                // className="block lg:inline-block md:mx-2 md:mb-0 mb-4"
+                className="flex flex-col lg:flex-row lg:items-center gap-4"
+                onClick={() => handleSalesExport(userExportData, salesTopic)}
             >
                 <Button block size="sm" icon={<HiDownload />}>
                     Clients
                 </Button>
             </Link>
+            <ProductTableSearch />
+
             <Link
                 className="block lg:inline-block md:mb-0 mb-4"
                 to="/app/users/user-new"

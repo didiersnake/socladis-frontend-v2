@@ -1,6 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import dayjs from 'dayjs'
-import { apiDeletePurchase, apiGetPurchaseOrders, apiGetPurchaseOrdersByRange } from 'services/PurchaseServie'
+import {
+    apiDeletePurchase,
+    apiGetCrmCustomersStatistic,
+    apiGetPurchaseOrders,
+    apiGetPurchaseOrdersByRange,
+} from 'services/PurchaseServie'
+
+export const getCustomerStatistic = createAsyncThunk(
+    'salesProductList/data/getCustomerStatistic',
+    async () => {
+        const response = await apiGetCrmCustomersStatistic()
+        console.log(response)
+        return response.data
+    }
+)
 
 export const getOrders = createAsyncThunk(
     'salesProductList/data/getOrders',
@@ -42,6 +56,8 @@ const dataSlice = createSlice({
         loading: false,
         orderList: [],
         purchaseByRange: [],
+        statisticData: {},
+        statisticLoading: false,
         tableData: initialTableData,
     },
     reducers: {
@@ -67,6 +83,13 @@ const dataSlice = createSlice({
         },
         [getPurchaseByRange.pending]: (state) => {
             state.loading = true
+        },
+        [getCustomerStatistic.loading]: (state) => {
+            state.statisticLoading = true
+        },
+        [getCustomerStatistic.fulfilled]: (state, action) => {
+            state.statisticData = action.payload
+            state.statisticLoading = false
         },
     },
 })

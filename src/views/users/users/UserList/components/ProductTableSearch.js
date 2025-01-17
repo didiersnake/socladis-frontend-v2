@@ -42,7 +42,7 @@ const ProductTableSearch = () => {
     return (
         <Input
             ref={searchInput}
-            className="max-w-md md:w-52 md:mb-0 mb-4"
+            className="lg:w-52"
             size="sm"
             placeholder="Search product"
             prefix={<HiOutlineSearch className="text-lg" />}

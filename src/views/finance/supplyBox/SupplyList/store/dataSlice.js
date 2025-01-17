@@ -1,6 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import dayjs from 'dayjs'
-import { apiDeleteEmpty, apiGetEmptyByRange, apiGetEmptyStore } from 'services/SupplyServices'
+import {
+    apiDeleteEmpty,
+    apiGetCrmCustomersStatistic,
+    apiGetEmptyByRange,
+    apiGetEmptyStore,
+} from 'services/SupplyServices'
 
 export const getEmptyStore = createAsyncThunk(
     'salesProductList/data/getOrders',
@@ -8,6 +13,15 @@ export const getEmptyStore = createAsyncThunk(
         const response = await apiGetEmptyStore(data)
         // console.log(response.data)
 
+        return response.data
+    }
+)
+
+export const getCustomerStatistic = createAsyncThunk(
+    'salesProductList/data/getCustomerStatistic',
+    async () => {
+        const response = await apiGetCrmCustomersStatistic()
+        console.log(response)
         return response.data
     }
 )
@@ -35,7 +49,7 @@ export const initialTableData = {
         key: '',
     },
     startDate: dayjs().subtract(3, 'month').toDate(),
-    endDate: new Date()
+    endDate: new Date(),
 }
 
 const dataSlice = createSlice({
@@ -44,7 +58,9 @@ const dataSlice = createSlice({
         loading: false,
         orderList: [],
         tableData: initialTableData,
-        orderByRange:[],
+        statisticData: {},
+        statisticLoading: false,
+        orderByRange: [],
     },
     reducers: {
         setOrderList: (state, action) => {
@@ -69,6 +85,13 @@ const dataSlice = createSlice({
         },
         [getAvarisByRange.pending]: (state) => {
             state.loading = true
+        },
+        [getCustomerStatistic.loading]: (state) => {
+            state.statisticLoading = true
+        },
+        [getCustomerStatistic.fulfilled]: (state, action) => {
+            state.statisticData = action.payload
+            state.statisticLoading = false
         },
     },
 })

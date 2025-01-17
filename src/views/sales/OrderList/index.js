@@ -5,6 +5,7 @@ import OrdersTableTools from './components/OrdersTableTools'
 import OrderDeleteConfirmation from './components/OrderDeleteConfirmation'
 import { injectReducer } from 'store'
 import reducer from './store'
+import CustomerStatistic from './components/CustomerStatistic'
 
 injectReducer('salesOrderList', reducer)
 
@@ -16,6 +17,7 @@ const OrderList = () => {
                 <h3 className="mb-4 lg:mb-0">Ventes</h3>
                 <OrdersTableTools />
             </div>
+            <CustomerStatistic />
             <OrdersTable />
             <OrderDeleteConfirmation />
         </AdaptableCard>

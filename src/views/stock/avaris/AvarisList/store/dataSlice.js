@@ -1,6 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import dayjs from 'dayjs'
-import { apiDeletePurchase, apiGetAvaris, apiGetAvarisByRange } from 'services/AvarisService'
+import {
+    apiDeletePurchase,
+    apiGetAvaris,
+    apiGetAvarisByRange,
+    apiGetCrmCustomersStatistic,
+} from 'services/AvarisService'
+
+export const getCustomerStatistic = createAsyncThunk(
+    'salesProductList/data/getCustomerStatistic',
+    async () => {
+        const response = await apiGetCrmCustomersStatistic()
+        console.log(response)
+        return response.data
+    }
+)
 
 export const getAvaris = createAsyncThunk(
     'salesProductList/data/getOrders',
@@ -42,6 +56,8 @@ const dataSlice = createSlice({
         loading: false,
         orderList: [],
         orderByRange: [],
+        statisticData: {},
+        statisticLoading: false,
         tableData: initialTableData,
     },
     reducers: {
@@ -67,6 +83,14 @@ const dataSlice = createSlice({
         },
         [getAvarisByRange.pending]: (state) => {
             state.loading = true
+        },
+
+        [getCustomerStatistic.loading]: (state) => {
+            state.statisticLoading = true
+        },
+        [getCustomerStatistic.fulfilled]: (state, action) => {
+            state.statisticData = action.payload
+            state.statisticLoading = false
         },
     },
 })

@@ -4,6 +4,7 @@ import { injectReducer } from 'store/index'
 import { AdaptableCard } from 'components/shared'
 import ProductTable from './components/ProductTable'
 import ProductTableTools from './components/ProductTableTools'
+import CustomerStatistic from './components/CustomerStatistic'
 
 injectReducer('salesProductList', reducer)
 
@@ -14,6 +15,7 @@ const ProductList = () => {
                 <h3 className="mb-4 lg:mb-0">Utilisateurs</h3>
                 <ProductTableTools />
             </div>
+            <CustomerStatistic />
             <ProductTable />
         </AdaptableCard>
     )

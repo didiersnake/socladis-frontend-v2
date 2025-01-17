@@ -1,12 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import {
-
     apiDeleteUser,
     apiGetAllClients,
     apiGetAllGroups,
     // apiGetAllEmployeeUsers,
     apiGetAllUsers,
+    apiGetCrmCustomersStatistic,
 } from 'services/UserService'
+
+export const getCustomerStatistic = createAsyncThunk(
+    'salesProductList/data/getCustomerStatistic',
+    async () => {
+        const response = await apiGetCrmCustomersStatistic()
+        return response.data
+    }
+)
 
 //paginated users
 export const getProducts = createAsyncThunk(
@@ -34,7 +42,6 @@ export const getGroups = createAsyncThunk(
     }
 )
 
-
 export const deleteProduct = async (data) => {
     const response = await apiDeleteUser(data)
     return response.data
@@ -61,7 +68,6 @@ export const initialFilterData = {
     roles: '',
     password: '',
     uniqueCode: '',
-
 }
 
 const dataSlice = createSlice({
@@ -69,9 +75,11 @@ const dataSlice = createSlice({
     initialState: {
         loading: false,
         productList: [],
+        statisticData: {},
+        statisticLoading: false,
         // employees: [],
         clients: [],
-        groups:[],
+        groups: [],
         tableData: initialTableData,
         filterData: initialFilterData,
     },
@@ -108,6 +116,13 @@ const dataSlice = createSlice({
         },
         [getGroups.pending]: (state) => {
             state.loading = true
+        },
+        [getCustomerStatistic.loading]: (state) => {
+            state.statisticLoading = true
+        },
+        [getCustomerStatistic.fulfilled]: (state, action) => {
+            state.statisticData = action.payload
+            state.statisticLoading = false
         },
 
         // [getAllEmployeeUsers.fulfilled]: (state, action) => {

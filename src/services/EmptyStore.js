@@ -8,6 +8,14 @@ export async function apiGetEmptyStore(data) {
     })
 }
 
+export async function apiGetCrmCustomersStatistic(params) {
+    return ApiService.fetchData({
+        url: '/api/customers-statistic',
+        method: 'get',
+        params,
+    })
+}
+
 export async function apiDeleteEmpty(data) {
     const { id } = data
     return ApiService.fetchData({

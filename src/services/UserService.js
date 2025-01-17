@@ -1,5 +1,13 @@
 import ApiService from './ApiService'
 
+export async function apiGetCrmCustomersStatistic(params) {
+    return ApiService.fetchData({
+        url: '/api/customers-statistic',
+        method: 'get',
+        params,
+    })
+}
+
 export async function apiGetAllUsers(data) {
     return ApiService.fetchData({
         url: '/api/all/user/',

@@ -124,18 +124,18 @@ export const protectedRoutes = [
         authority: [],
     },
 
-    {
-        key: 'stockMenu.load',
-        path: '/app/team-load',
-        component: React.lazy(() => import('views/stock/Load')),
-        authority: [],
-    },
-    {
-        key: 'stockMenu.return',
-        path: '/app/team-return',
-        component: React.lazy(() => import('views/stock/Return')),
-        authority: [],
-    },
+    // {
+    //     key: 'stockMenu.load',
+    //     path: '/app/team-load',
+    //     component: React.lazy(() => import('views/stock/Load')),
+    //     authority: [],
+    // },
+    // {
+    //     key: 'stockMenu.return',
+    //     path: '/app/team-return',
+    //     component: React.lazy(() => import('views/stock/Return')),
+    //     authority: [],
+    // },
 
     //  Stock Avaris
 
@@ -259,16 +259,6 @@ export const protectedRoutes = [
         component: React.lazy(() =>
             import('views/finance/fundExpenses/ExpenseNew/index')
         ),
-        authority: [],
-    },
-
-
-
-
-    {
-        key: 'reportMenu.ristourne',
-        path: '/app/ristourne',
-        component: React.lazy(() => import('views/reports')),
         authority: [],
     },
 ]

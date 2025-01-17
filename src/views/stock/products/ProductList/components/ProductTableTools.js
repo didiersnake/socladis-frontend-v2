@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 const ProductTableTools = () => {
     return (
-        <div className="flex flex-col lg:flex-row lg:items-center">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
             <ProductTableSearch />
             {/* <ProductFilter /> */}
             <Link
@@ -14,9 +14,7 @@ const ProductTableTools = () => {
                 to="/data/product-list.csv"
                 target="_blank"
                 download
-            >
-
-            </Link>
+            ></Link>
             <Link
                 className="block lg:inline-block md:mb-0 mb-4"
                 to="/app/product-new"
