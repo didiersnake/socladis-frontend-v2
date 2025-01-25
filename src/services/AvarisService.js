@@ -10,7 +10,7 @@ export async function apiGetAvaris(data) {
 
 export async function apiGetCrmCustomersStatistic(params) {
     return ApiService.fetchData({
-        url: '/api/customers-statistic',
+        url: '/api/avaris/customers-statistic',
         method: 'get',
         params,
     })

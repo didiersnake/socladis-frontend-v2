@@ -115,7 +115,7 @@ const OrdersTableTools = () => {
                 to="/app/sales/sale-new"
             >
                 <Button block variant="solid" size="sm" icon={<HiPlusCircle />}>
-                    Ajouter un Facture
+                    Ajouter une Facture
                 </Button>
             </Link>
         </div>

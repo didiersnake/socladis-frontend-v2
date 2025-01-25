@@ -11,8 +11,6 @@ export const getEmptyStore = createAsyncThunk(
     'salesProductList/data/getOrders',
     async (data) => {
         const response = await apiGetEmptyStore(data)
-        // console.log(response.data)
-
         return response.data
     }
 )
@@ -21,7 +19,7 @@ export const getCustomerStatistic = createAsyncThunk(
     'salesProductList/data/getCustomerStatistic',
     async () => {
         const response = await apiGetCrmCustomersStatistic()
-        console.log(response)
+        console.log(response.data)
         return response.data
     }
 )

@@ -199,7 +199,9 @@ const OrdersTable = () => {
                     const row = props.row.original
                     return (
                         <span>
-                            {Number(row.VAT_amount).toFixed(2).toString()}
+                            {Number(row.withdrawal_amount)
+                                .toFixed(2)
+                                .toString()}
                         </span>
                     )
                 },

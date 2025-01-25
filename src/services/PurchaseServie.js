@@ -10,7 +10,7 @@ export async function apiGetPurchaseOrders(data) {
 
 export async function apiGetCrmCustomersStatistic(params) {
     return ApiService.fetchData({
-        url: '/api/customers-statistic',
+        url: '/api/achat/customers-statistic',
         method: 'get',
         params,
     })

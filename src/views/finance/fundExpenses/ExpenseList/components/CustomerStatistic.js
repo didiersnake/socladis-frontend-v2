@@ -15,13 +15,18 @@ const StatisticCard = (props) => {
     const avatarSize = 55
 
     const Period = () => (
-        <>
+        <div>
             <p>
                 <span className=" text-sm font-semibold">
                     {moment().format('MM[/]YYYY')}
                 </span>
             </p>
-        </>
+            <div>
+                <p>
+                    <strong>XAF</strong>
+                </p>
+            </div>
+        </div>
     )
 
     return (
@@ -50,7 +55,7 @@ const StatisticCard = (props) => {
                             <h3>
                                 <NumberFormat
                                     displayType="text"
-                                    value={value}
+                                    value={Number(value)}
                                     thousandSeparator
                                 />
                             </h3>
@@ -85,7 +90,7 @@ const CustomerStatistic = () => {
                 icon={<BsBank />}
                 avatarClass="!bg-emerald-500"
                 label="Banque"
-                value={statisticData?.users}
+                value={statisticData?.bank}
                 // growthRate={statisticData?.totalCustomers?.growShrink}
                 loading={loading}
             />
@@ -93,7 +98,7 @@ const CustomerStatistic = () => {
                 icon={<FaShippingFast />}
                 avatarClass="!bg-blue-500"
                 label="Carburant"
-                value={statisticData?.customers}
+                value={statisticData?.fuel}
                 // growthRate={statisticData?.activeCustomers?.growShrink}
                 loading={loading}
             />
@@ -101,7 +106,7 @@ const CustomerStatistic = () => {
                 icon={<HiOutlineChevronDoubleUp />}
                 avatarClass="!bg-indigo-600"
                 label="Courante"
-                value={statisticData?.employees}
+                value={statisticData?.current}
                 // growthRate={statisticData?.newCustomers?.growShrink}
                 loading={loading}
             />

@@ -2,11 +2,7 @@ import React, { useEffect } from 'react'
 import { Card, Avatar } from 'components/ui'
 import { MediaSkeleton, Loading } from 'components/shared'
 import { getCustomerStatistic } from '../store/dataSlice'
-import {
-    HiOutlineCheckCircle,
-    HiOutlineChevronDoubleUp,
-    HiTrendingDown,
-} from 'react-icons/hi'
+import { HiOutlineChevronDoubleUp, HiTrendingDown } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
 import NumberFormat from 'react-number-format'
 import moment from 'moment'
@@ -52,14 +48,13 @@ const StatisticCard = (props) => {
                             <h3>
                                 <NumberFormat
                                     displayType="text"
-                                    value={value}
+                                    value={Number(value)}
                                     thousandSeparator
                                 />
                             </h3>
                         </div>
                     </div>
                     <Period />
-                    {/* <GrowShrinkTag value={growthRate} suffix="%" /> */}
                 </div>
             </Loading>
         </Card>
@@ -87,15 +82,15 @@ const CustomerStatistic = () => {
                 icon={<HiOutlineChevronDoubleUp />}
                 avatarClass="!bg-indigo-600"
                 label="Achats"
-                value={statisticData?.users}
+                value={statisticData?.achat}
                 // growthRate={statisticData?.totalCustomers?.growShrink}
                 loading={loading}
             />
             <StatisticCard
-                icon={<HiOutlineCheckCircle />}
-                avatarClass="!bg-emerald-500"
+                icon={<HiOutlineChevronDoubleUp />}
+                avatarClass="!bg-indigo-600"
                 label="Commissions"
-                value={statisticData?.customers}
+                value={statisticData?.commission}
                 // growthRate={statisticData?.activeCustomers?.growShrink}
                 loading={loading}
             />
@@ -103,7 +98,7 @@ const CustomerStatistic = () => {
                 icon={<HiTrendingDown />}
                 avatarClass="!bg-blue-500"
                 label="Promotions"
-                value={statisticData?.employees}
+                value={statisticData?.promotion}
                 // growthRate={statisticData?.newCustomers?.growShrink}
                 loading={loading}
             />

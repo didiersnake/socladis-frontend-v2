@@ -13,13 +13,18 @@ const StatisticCard = (props) => {
     const avatarSize = 55
 
     const Period = () => (
-        <>
+        <div>
             <p>
                 <span className=" text-sm font-semibold">
                     {moment().format('MM[/]YYYY')}
                 </span>
             </p>
-        </>
+            <div>
+                <p>
+                    <strong>XAF</strong>
+                </p>
+            </div>
+        </div>
     )
 
     return (
@@ -48,13 +53,14 @@ const StatisticCard = (props) => {
                             <h3>
                                 <NumberFormat
                                     displayType="text"
-                                    value={value}
+                                    value={Number(value)}
                                     thousandSeparator
                                 />
                             </h3>
                         </div>
                     </div>
                     <Period />
+
                     {/* <GrowShrinkTag value={growthRate} suffix="%" /> */}
                 </div>
             </Loading>
@@ -83,7 +89,7 @@ const CustomerStatistic = () => {
                 icon={<HiOutlineChevronDoubleDown />}
                 avatarClass="!bg-emerald-500"
                 label="Total"
-                value={statisticData?.users}
+                value={statisticData}
                 // growthRate={statisticData?.totalCustomers?.growShrink}
                 loading={loading}
             />

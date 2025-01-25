@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Card, Avatar } from 'components/ui'
 import { MediaSkeleton, Loading } from 'components/shared'
 import { getCustomerStatistic } from '../store/dataSlice'
-import { HiOutlineDocumentDownload } from 'react-icons/hi'
+import { HiCollection } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
 import NumberFormat from 'react-number-format'
 import moment from 'moment'
@@ -48,14 +48,13 @@ const StatisticCard = (props) => {
                             <h3>
                                 <NumberFormat
                                     displayType="text"
-                                    value={value}
+                                    value={Number(value)}
                                     thousandSeparator
                                 />
                             </h3>
                         </div>
                     </div>
                     <Period />
-                    {/* <GrowShrinkTag value={growthRate} suffix="%" /> */}
                 </div>
             </Loading>
         </Card>
@@ -80,26 +79,26 @@ const CustomerStatistic = () => {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
             <StatisticCard
-                icon={<HiOutlineDocumentDownload />}
+                icon={<HiCollection />}
                 avatarClass="!bg-emerald-500"
                 label="Casiers"
-                value={statisticData?.users}
+                value={statisticData?.casiers}
                 // growthRate={statisticData?.totalCustomers?.growShrink}
                 loading={loading}
             />
             <StatisticCard
-                icon={<HiOutlineDocumentDownload />}
+                icon={<HiCollection />}
                 avatarClass="!bg-blue-500"
                 label="Bouteilles"
-                value={statisticData?.customers}
+                value={statisticData?.bottles}
                 // growthRate={statisticData?.activeCustomers?.growShrink}
                 loading={loading}
             />
             <StatisticCard
-                icon={<HiOutlineDocumentDownload />}
+                icon={<HiCollection />}
                 avatarClass="!bg-indigo-600"
                 label="Plastic"
-                value={statisticData?.employees}
+                value={statisticData?.plastic}
                 // growthRate={statisticData?.newCustomers?.growShrink}
                 loading={loading}
             />

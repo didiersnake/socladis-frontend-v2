@@ -5,9 +5,9 @@ import DatePicker from 'components/ui/DatePicker'
 import { Field } from 'formik'
 
 export const categories = [
-    { label: 'Versement en banque', value: 'Versement en banque' },
-    { label: 'Carburant', value: 'Carburant' },
-    { label: 'Depenses Courante', value: 'Depenses Courante' },
+    { label: 'Versement en banque', value: 'versement en banque' },
+    { label: 'Carburant', value: 'carburant' },
+    { label: 'Depenses Courante', value: 'depenses courante' },
 ]
 
 export const bank = [
@@ -16,12 +16,9 @@ export const bank = [
     { label: 'BGFI Bank', value: 'BGFI Bank' },
 ]
 
-
 const BasicInformationFields = (props) => {
-    const { touched, errors, values  } = props
+    const { touched, errors, values } = props
 
-    // console.log(suggestions);
-    
     return (
         <AdaptableCard className="mb-4" divider>
             <h5> Depenses </h5>

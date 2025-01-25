@@ -49,14 +49,13 @@ const StatisticCard = (props) => {
                             <h3>
                                 <NumberFormat
                                     displayType="text"
-                                    value={value}
+                                    value={Number(value)}
                                     thousandSeparator
                                 />
                             </h3>
                         </div>
                     </div>
                     <Period />
-                    {/* <GrowShrinkTag value={growthRate} suffix="%" /> */}
                 </div>
             </Loading>
         </Card>
@@ -84,7 +83,7 @@ const CustomerStatistic = () => {
                 icon={<HiCollection />}
                 avatarClass="!bg-emerald-500"
                 label="Magasin"
-                value={statisticData?.users}
+                value={statisticData?.magasin}
                 // growthRate={statisticData?.totalCustomers?.growShrink}
                 loading={loading}
             />
@@ -92,7 +91,7 @@ const CustomerStatistic = () => {
                 icon={<FaShippingFast />}
                 avatarClass="!bg-blue-500"
                 label="Livraison"
-                value={statisticData?.customers}
+                value={statisticData?.livraison}
                 // growthRate={statisticData?.activeCustomers?.growShrink}
                 loading={loading}
             />
