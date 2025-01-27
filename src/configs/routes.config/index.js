@@ -7,7 +7,7 @@ export const protectedRoutes = [
     {
         key: 'dashboard',
         path: '/app/dashboard',
-        component: React.lazy(() => import('views/Home')),
+        component: React.lazy(() => import('views/SalesDashboard')),
         authority: [],
     },
 

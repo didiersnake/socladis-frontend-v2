@@ -1,11 +1,9 @@
 import React from 'react'
-import { DatePicker, Button } from 'components/ui'
+import { DatePicker } from 'components/ui'
 import { setStartDate, setEndDate } from '../store/stateSlice'
-import { getSalesDashboardData } from '../store/dataSlice'
-import { HiOutlineFilter } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
 
-const dateFormat = 'MMM DD, YYYY'
+const dateFormat = 'DD MMM, YYYY'
 
 const { DatePickerRange } = DatePicker
 
@@ -22,15 +20,15 @@ const SalesDashboardHeader = () => {
         dispatch(setEndDate(value[1]))
     }
 
-    const onFilter = () => {
-        dispatch(getSalesDashboardData())
-    }
+    // const onFilter = () => {
+    //     dispatch(getSalesDashboardData())
+    // }
 
     return (
         <div className="lg:flex items-center justify-between mb-4 gap-3">
             <div className="mb-4 lg:mb-0">
-                <h3>Sales Overview</h3>
-                <p>View your current sales & summary</p>
+                <h3>Sommaire des ventes</h3>
+                <p>Consultez vos ventes actuelles et résumé</p>
             </div>
             <div className="flex flex-col lg:flex-row lg:items-center gap-3">
                 <DatePickerRange
@@ -39,9 +37,9 @@ const SalesDashboardHeader = () => {
                     inputFormat={dateFormat}
                     size="sm"
                 />
-                <Button size="sm" icon={<HiOutlineFilter />} onClick={onFilter}>
+                {/* <Button size="sm" icon={<HiOutlineFilter />} onClick={onFilter}>
                     Filter
-                </Button>
+                </Button> */}
             </div>
         </div>
     )

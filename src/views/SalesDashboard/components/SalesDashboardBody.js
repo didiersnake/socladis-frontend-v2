@@ -7,17 +7,14 @@ import LatestOrder from './LatestOrder'
 import TopProduct from './TopProduct'
 import { getSalesDashboardData } from '../store/dataSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import CustomerStatistic from './CustomerStatistic'
 
 const SalesDashboardBody = () => {
     const dispatch = useDispatch()
 
-    const {
-        statisticData,
-        salesReportData,
-        topProductsData,
-        latestOrderData,
-        salesByCategoriesData,
-    } = useSelector((state) => state.salesDashboard.data.dashboardData)
+    const data = useSelector((state) => state.salesDashboard.data.dashboardData)
+    console.log('data', data)
+
     const loading = useSelector((state) => state.salesDashboard.data.loading)
 
     useEffect(() => {
@@ -31,15 +28,16 @@ const SalesDashboardBody = () => {
 
     return (
         <Loading loading={loading}>
-            <Statistic data={statisticData} />
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <CustomerStatistic data={data?.statisticData} />
+
+            {/* <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <SalesReport data={salesReportData} className="col-span-2" />
                 <SalesByCategories data={salesByCategoriesData} />
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <LatestOrder data={latestOrderData} className="lg:col-span-2" />
                 <TopProduct data={topProductsData} />
-            </div>
+            </div> */}
         </Loading>
     )
 }

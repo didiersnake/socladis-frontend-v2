@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { apiGetSalesDashboardData } from 'services/SalesService'
+import { apiGetSalesDashboardData } from 'services/SaleService'
 
 export const getSalesDashboardData = createAsyncThunk(
     'salesDashboard/data/getSalesDashboardData',
     async (data) => {
         const response = await apiGetSalesDashboardData(data)
+        console.log(response.data)
+        
         return response.data
     }
 )
