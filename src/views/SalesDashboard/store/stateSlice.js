@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 const stateSlice = createSlice({
     name: 'salesDashboard/state',
     initialState: {
-        startDate: dayjs().subtract(3, 'month').toDate(),
+        startDate: dayjs().subtract(1, 'month').toDate(),
         endDate: new Date(),
     },
     reducers: {

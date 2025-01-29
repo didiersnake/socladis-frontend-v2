@@ -8,12 +8,16 @@ import TopProduct from './TopProduct'
 import { getSalesDashboardData } from '../store/dataSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import CustomerStatistic from './CustomerStatistic'
+import Holding from './Holding'
 
 const SalesDashboardBody = () => {
     const dispatch = useDispatch()
 
     const data = useSelector((state) => state.salesDashboard.data.dashboardData)
-    console.log('data', data)
+    const startDate = useSelector(
+        (state) => state.salesDashboard.state.startDate
+    )
+    const endDate = useSelector((state) => state.salesDashboard.state.endDate)
 
     const loading = useSelector((state) => state.salesDashboard.data.loading)
 
@@ -23,12 +27,14 @@ const SalesDashboardBody = () => {
     }, [])
 
     const fetchData = () => {
-        dispatch(getSalesDashboardData())
+        dispatch(getSalesDashboardData({ startDate, endDate }))
     }
 
     return (
         <Loading loading={loading}>
             <CustomerStatistic data={data?.statisticData} />
+
+            <Holding data={data?.inventory} />
 
             {/* <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <SalesReport data={salesReportData} className="col-span-2" />
