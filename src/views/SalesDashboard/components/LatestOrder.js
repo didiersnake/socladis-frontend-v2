@@ -1,41 +1,24 @@
-import React, { useMemo, useCallback } from 'react'
-import { Card, Button, Table, Badge } from 'components/ui'
+import React, { useMemo } from 'react'
+import { Card, Table } from 'components/ui'
 import useThemeClass from 'utils/hooks/useThemeClass'
 import { useTable } from 'react-table'
-import { useNavigate } from 'react-router-dom'
 import NumberFormat from 'react-number-format'
-import dayjs from 'dayjs'
 
 const { Tr, Td, TBody, THead, Th } = Table
-
-const orderStatusColor = {
-    0: {
-        label: 'Paid',
-        dotClass: 'bg-emerald-500',
-        textClass: 'text-emerald-500',
-    },
-    1: {
-        label: 'Pending',
-        dotClass: 'bg-amber-500',
-        textClass: 'text-amber-500',
-    },
-    2: { label: 'Failed', dotClass: 'bg-red-500', textClass: 'text-red-500' },
-}
-
 const OrderColumn = ({ row }) => {
     const { textTheme } = useThemeClass()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
-    const onView = useCallback(() => {
-        navigate(`/app/sales/order-details/${row.id}`)
-    }, [navigate, row])
+    // const onView = useCallback(() => {
+    //     navigate(`/app/sales/order-details/${row.id}`)
+    // }, [navigate, row])
 
     return (
         <span
             className={`cursor-pointer select-none font-semibold hover:${textTheme}`}
-            onClick={onView}
+            // onClick={onView}
         >
-            #{row.id}
+            {row.name}
         </span>
     )
 }
@@ -44,60 +27,30 @@ const LatestOrder = ({ data = [], className }) => {
     const columns = useMemo(
         () => [
             {
-                Header: 'Order',
-                accessor: 'id',
+                Header: 'Produit',
+                accessor: 'name',
                 sortable: true,
                 Cell: (props) => <OrderColumn row={props.row.original} />,
             },
             {
-                Header: 'Status',
-                accessor: 'status',
-                sortable: true,
-                Cell: (props) => {
-                    const { status } = props.row.original
-                    return (
-                        <div className="flex items-center">
-                            <Badge
-                                className={orderStatusColor[status].dotClass}
-                            />
-                            <span
-                                className={`ml-2 rtl:mr-2 capitalize font-semibold ${orderStatusColor[status].textClass}`}
-                            >
-                                {orderStatusColor[status].label}
-                            </span>
-                        </div>
-                    )
-                },
-            },
-            {
-                Header: 'Date',
-                accessor: 'date',
+                Header: 'Format',
+                accessor: 'format',
                 sortable: true,
                 Cell: (props) => {
                     const row = props.row.original
-                    return (
-                        <span>{dayjs.unix(row.date).format('DD/MM/YYYY')}</span>
-                    )
+                    return <span className="capitalize">{row.format}</span>
                 },
             },
             {
-                Header: 'Customer',
-                accessor: 'customer',
-                sortable: true,
-            },
-            {
-                Header: 'Total',
-                accessor: 'totalAmount',
+                Header: 'Quantité',
+                accessor: 'quantity',
                 sortable: true,
                 Cell: (props) => {
-                    const { totalAmount } = props.row.original
+                    const { quantity } = props.row.original
                     return (
                         <NumberFormat
                             displayType="text"
-                            value={(
-                                Math.round(totalAmount * 100) / 100
-                            ).toFixed(2)}
-                            prefix={'$'}
+                            value={quantity}
                             thousandSeparator={true}
                         />
                     )
@@ -113,8 +66,8 @@ const LatestOrder = ({ data = [], className }) => {
     return (
         <Card className={className}>
             <div className="flex items-center justify-between mb-6">
-                <h4>Latest Orders</h4>
-                <Button size="sm">View Orders</Button>
+                <h4>Stock Faible</h4>
+                {/* <Button size="sm">View Orders</Button> */}
             </div>
             <Table {...getTableProps()}>
                 <THead>

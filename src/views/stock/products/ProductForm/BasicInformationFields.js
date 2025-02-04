@@ -15,7 +15,7 @@ export const formats = [
 ]
 
 const PriceInput = (props) => {
-    return <Input {...props} value={props.field.value} prefix="cfa" />
+    return <Input {...props} value={props.field.value} />
 }
 const NumberFormatInput = ({ onValueChange, ...rest }) => {
     return (
@@ -51,27 +51,6 @@ const BasicInformationFields = (props) => {
                     placeholder="Name"
                     component={Input}
                 />
-            </FormItem>
-            <FormItem
-                label="Prix d'Achat"
-                invalid={errors.unitPrice && touched.unitPrice}
-                errorMessage={errors.unitPrice}
-            >
-                <Field name="unitPrice">
-                    {({ field, form }) => {
-                        return (
-                            <NumberFormatInput
-                                form={form}
-                                field={field}
-                                placeholder="Prix"
-                                customInput={PriceInput}
-                                onValueChange={(e) => {
-                                    form.setFieldValue(field.name, e.value)
-                                }}
-                            />
-                        )
-                    }}
-                </Field>
             </FormItem>
             <FormItem
                 label="Category"
@@ -116,6 +95,27 @@ const BasicInformationFields = (props) => {
                 </Field>
             </FormItem>
             <FormItem
+                label="Seuil de Stock"
+                invalid={errors.unitPrice && touched.unitPrice}
+                errorMessage={errors.unitPrice}
+            >
+                <Field name="unitPrice">
+                    {({ field, form }) => {
+                        return (
+                            <NumberFormatInput
+                                form={form}
+                                field={field}
+                                placeholder="0"
+                                customInput={PriceInput}
+                                onValueChange={(e) => {
+                                    form.setFieldValue(field.name, e.value)
+                                }}
+                            />
+                        )
+                    }}
+                </Field>
+            </FormItem>
+            <FormItem
                 label="Prix Grossiste"
                 invalid={errors.grossiste && touched.grossiste}
                 errorMessage={errors.grossiste}
@@ -124,7 +124,7 @@ const BasicInformationFields = (props) => {
                     type="text"
                     autoComplete="off"
                     name="grossiste"
-                    placeholder="Prix de vente"
+                    placeholder="0"
                     component={Input}
                 />
             </FormItem>
@@ -137,7 +137,7 @@ const BasicInformationFields = (props) => {
                     type="text"
                     autoComplete="off"
                     name="Semi_grossiste"
-                    placeholder="Prix de vente"
+                    placeholder="0"
                     component={Input}
                 />
             </FormItem>
@@ -150,7 +150,7 @@ const BasicInformationFields = (props) => {
                     type="text"
                     autoComplete="off"
                     name="detaillant"
-                    placeholder="Prix de vente"
+                    placeholder="0"
                     component={Input}
                 />
             </FormItem>
@@ -163,7 +163,7 @@ const BasicInformationFields = (props) => {
                     type="text"
                     autoComplete="off"
                     name="random"
-                    placeholder="Prix de vente"
+                    placeholder="0"
                     component={Input}
                 />
             </FormItem>

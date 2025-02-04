@@ -117,6 +117,11 @@ const ProductTable = () => {
                 },
             },
             {
+                Header: 'Format',
+                accessor: 'format',
+                sortable: true,
+            },
+            {
                 Header: 'Qtt En Stock',
                 accessor: 'quantity',
                 sortable: true,
@@ -146,12 +151,12 @@ const ProductTable = () => {
                 },
             },
 
-            {
-                Header: '',
-                id: 'action',
-                accessor: (row) => row,
-                Cell: (props) => <ActionColumn row={props.row.original} />,
-            },
+            // {
+            //     Header: '',
+            //     id: 'action',
+            //     accessor: (row) => row,
+            //     Cell: (props) => <ActionColumn row={props.row.original} />,
+            // },
         ],
         []
     )

@@ -119,6 +119,10 @@ const OrdersTable = () => {
                 Header: 'Nom du Produit',
                 accessor: 'name',
                 sortable: true,
+                Cell: (props) => {
+                    const row = props.row.original
+                    return <span className="capitalize">{row?.name}</span>
+                },
             },
             {
                 Header: 'Quantité',
@@ -129,6 +133,12 @@ const OrdersTable = () => {
                 Header: "Type d'Achat",
                 accessor: 'purchase_type',
                 sortable: true,
+                Cell: (props) => {
+                    const row = props.row.original
+                    return (
+                        <span className="capitalize">{row?.purchase_type}</span>
+                    )
+                },
             },
             {
                 Header: 'Ajouté Par',
@@ -157,7 +167,6 @@ const OrdersTable = () => {
         ],
         []
     )
-    // console.log(tableData);
     
     const onPaginationChange = (page) => {
         const newTableData = cloneDeep(tableData)

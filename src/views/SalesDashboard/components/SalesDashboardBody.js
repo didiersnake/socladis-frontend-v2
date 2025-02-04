@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { Loading } from 'components/shared'
-import Statistic from './Statistic'
 import SalesReport from './SalesReport'
 import SalesByCategories from './SalesByCategories'
 import LatestOrder from './LatestOrder'
@@ -36,14 +35,20 @@ const SalesDashboardBody = () => {
 
             <Holding data={data?.inventory} />
 
-            {/* <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                <SalesReport data={salesReportData} className="col-span-2" />
-                <SalesByCategories data={salesByCategoriesData} />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <SalesReport
+                    data={data?.salesReportData}
+                    className="col-span-2"
+                />
+                {/* <SalesByCategories data={salesByCategoriesData} /> */}
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                <LatestOrder data={latestOrderData} className="lg:col-span-2" />
-                <TopProduct data={topProductsData} />
-            </div> */}
+                <LatestOrder
+                    data={data?.lowStockList}
+                    className="lg:col-span-2"
+                />
+                {/* <TopProduct data={topProductsData} /> */}
+            </div>
         </Loading>
     )
 }

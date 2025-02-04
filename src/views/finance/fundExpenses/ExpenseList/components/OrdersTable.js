@@ -102,6 +102,10 @@ const columns = React.useMemo(
             Header: 'Motif',
             accessor: 'modif',
             sortable: true,
+            Cell: (props) => {
+                const row = props.row.original
+                return <span className="capitalize">{row?.modif}</span>
+            },
         },
         {
             Header: 'Banque',
@@ -112,6 +116,10 @@ const columns = React.useMemo(
             Header: 'Montant',
             accessor: 'amount',
             sortable: true,
+            Cell: (props) => {
+                const row = props.row.original
+                return <span>{Number(row?.amount).toLocaleString()}</span>
+            },
         },
         {
             Header: 'Ajouté Par',

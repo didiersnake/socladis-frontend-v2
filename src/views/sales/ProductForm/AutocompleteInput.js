@@ -32,11 +32,11 @@ const AutocompleteInput = ({ field, form, suggestions, placeholder }) => {
                 {...field} // Includes Formik's `value` and `name`
                 placeholder={placeholder}
                 onChange={handleChange}
-                value={field.value || ""}
-                className="border p-2 w-full rounded-md h-11"
+                value={field?.value}
+                className="border p-2 w-full rounded-md h-11 bg-transparent focus-visible:outline-blue-600 focus:outline focus-visible:outline-double dark:border-gray-600"
             />
             {showSuggestions && filteredSuggestions.length > 0 && (
-                <ul className="absolute z-10 bg-white border border-gray-300 mt-1 w-full max-h-60 overflow-auto">
+                <ul className="absolute z-10 bg-white border border-gray-300 mt-1 w-full max-h-60 overflow-auto dark:bg-slate-900">
                     {filteredSuggestions.map((item, index) => (
                         <li
                             key={index}

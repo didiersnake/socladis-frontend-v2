@@ -14,16 +14,19 @@ const ProductNew = () => {
 
     const handleFormSubmit = async (values, setSubmitting) => {
         let data = {
-            name: values.format === "Grand format" ? values.name + " 1L" : values.name,
+            name:
+                values.format === 'Grand format'
+                    ? values.name + ' 1L'
+                    : values.name,
             category: values.category,
             format: values.format,
             unitPrice: values.unitPrice,
             sale_price: [
                 {
                     grossiste: values.grossiste,
-                    Semi_grossiste: values.semi_grossiste,
+                    Semi_grossiste: values.Semi_grossiste,
                     detaillant: values.detaillant,
-                    random: values.random
+                    random: values.random,
                 },
             ],
         }

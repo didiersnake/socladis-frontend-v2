@@ -110,36 +110,56 @@ const ProductTable = () => {
                 Header: 'Statut',
                 accessor: 'roles',
                 sortable: true,
+                Cell: (props) => {
+                    const row = props.row.original
+                    return <span className="capitalize">{row?.roles}</span>
+                },
             },
             {
                 Header: 'NIU',
                 accessor: 'uniqueCode',
                 sortable: true,
+                Cell: (props) => {
+                    const row = props.row.original
+                    return <span className="capitalize">{row?.uniqueCode}</span>
+                },
             },
 
             {
                 Header: 'Category',
                 accessor: 'category',
                 sortable: true,
-                // Cell: (props) => {
-                //     const row = props.row.original
-                //     return <span className="capitalize">{row.category}</span>
-                // },
+                Cell: (props) => {
+                    const row = props.row.original
+                    return <span className="capitalize">{row?.category}</span>
+                },
             },
             {
                 Header: 'Regime Fiscal',
                 accessor: 'tax_system',
                 sortable: true,
+                Cell: (props) => {
+                    const row = props.row.original
+                    return <span className="capitalize">{row?.tax_system}</span>
+                },
             },
 
             {
                 Header: 'Equipe',
                 accessor: 'group',
                 sortable: true,
+                Cell: (props) => {
+                    const row = props.row.original
+                    return <span className="capitalize">{row?.group}</span>
+                },
             },
             {
                 Header: 'Localisation',
                 accessor: 'location',
+                Cell: (props) => {
+                    const row = props.row.original
+                    return <span className="capitalize">{row?.location}</span>
+                },
             },
             {
                 Header: 'Pass',

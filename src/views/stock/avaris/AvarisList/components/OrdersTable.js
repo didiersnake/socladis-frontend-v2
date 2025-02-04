@@ -111,6 +111,10 @@ const OrdersTable = () => {
                 Header: "Type d'Avaris",
                 accessor: 'type',
                 sortable: true,
+                Cell: (props) => {
+                    const row = props.row.original
+                    return <span className="capitalize">{row.type}</span>
+                },
             },
             {
                 Header: 'Ajouté Par',

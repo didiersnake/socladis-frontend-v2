@@ -102,6 +102,10 @@ const OrdersTable = () => {
                 Header: 'Format',
                 accessor: 'format',
                 sortable: true,
+                Cell: (props) => {
+                    const row = props.row.original
+                    return <span className="capitalize">{row?.format}</span>
+                },
             },
             {
                 Header: 'Casier',

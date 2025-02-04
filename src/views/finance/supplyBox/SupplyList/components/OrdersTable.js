@@ -102,11 +102,21 @@ const OrdersTable = () => {
                 Header: 'Source',
                 accessor: 'income_source',
                 sortable: true,
+                Cell: (props) => {
+                    const row = props.row.original
+                    return (
+                        <span className="capitalize">{row?.income_source}</span>
+                    )
+                },
             },
             {
                 Header: 'Montant',
                 accessor: 'amount',
                 sortable: true,
+                Cell: (props) => {
+                    const row = props.row.original
+                    return <span>{Number(row?.amount).toLocaleString()}</span>
+                },
             },
             {
                 Header: 'Ajouté Par',
