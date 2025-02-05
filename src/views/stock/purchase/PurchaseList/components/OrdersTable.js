@@ -15,18 +15,6 @@ import useThemeClass from 'utils/hooks/useThemeClass'
 import { useNavigate } from 'react-router-dom'
 import cloneDeep from 'lodash/cloneDeep'
 
-const OrderColumn = ({ row }) => {
-    const { textTheme } = useThemeClass()
-    return (
-        <span
-            className={`cursor-pointer select-none font-semibold hover:${textTheme}`}
-            onClick={''}
-        >
-            {row.invoice_number}
-        </span>
-    )
-}
-
 const ActionColumn = ({ row }) => {
     const dispatch = useDispatch()
     const { textTheme } = useThemeClass()
@@ -65,9 +53,8 @@ const ActionColumn = ({ row }) => {
 
 const OrdersTable = () => {
     const dispatch = useDispatch()
-    const { pageIndex, pageSize, sort, query, total, startDate, endDate } = useSelector(
-        (state) => state.salesOrderList.data.tableData
-    )
+    const { pageIndex, pageSize, sort, query, total, startDate, endDate } =
+        useSelector((state) => state.salesOrderList.data.tableData)
     const loading = useSelector((state) => state.salesOrderList.data.loading)
     const data = useSelector((state) => state.salesOrderList.data.orderList)
 
@@ -80,8 +67,8 @@ const OrdersTable = () => {
         dispatch(
             getOrders({ pageIndex, pageSize, sort, query, startDate, endDate })
         )
-        dispatch(getPurchaseByRange({startDate, endDate}))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        dispatch(getPurchaseByRange({ startDate, endDate }))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, pageIndex, pageSize, sort, query, startDate, endDate])
 
     useEffect(() => {
@@ -100,7 +87,7 @@ const OrdersTable = () => {
                 Header: 'Facture',
                 accessor: 'invoice_number',
                 sortable: true,
-                Cell: (props) => <OrderColumn row={props.row.original} />,
+                // Cell: (props) => <OrderColumn row={props.row.original} />,
             },
             {
                 Header: 'Date',
@@ -167,7 +154,7 @@ const OrdersTable = () => {
         ],
         []
     )
-    
+
     const onPaginationChange = (page) => {
         const newTableData = cloneDeep(tableData)
         newTableData.pageIndex = page

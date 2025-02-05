@@ -3,7 +3,6 @@ import { Loading } from 'components/shared'
 import SalesReport from './SalesReport'
 import SalesByCategories from './SalesByCategories'
 import LatestOrder from './LatestOrder'
-import TopProduct from './TopProduct'
 import { getSalesDashboardData } from '../store/dataSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import CustomerStatistic from './CustomerStatistic'
@@ -26,7 +25,9 @@ const SalesDashboardBody = () => {
     }, [])
 
     const fetchData = () => {
-        dispatch(getSalesDashboardData({ startDate, endDate }))
+        const s_date = startDate?.toISOString()
+        const e_date = endDate?.toISOString()
+        dispatch(getSalesDashboardData({ s_date, e_date }))
     }
 
     return (
@@ -40,14 +41,13 @@ const SalesDashboardBody = () => {
                     data={data?.salesReportData}
                     className="col-span-2"
                 />
-                {/* <SalesByCategories data={salesByCategoriesData} /> */}
+                <SalesByCategories data={data?.salesByCategoriesData} />
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <LatestOrder
                     data={data?.lowStockList}
                     className="lg:col-span-2"
                 />
-                {/* <TopProduct data={topProductsData} /> */}
             </div>
         </Loading>
     )

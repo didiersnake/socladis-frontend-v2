@@ -56,6 +56,21 @@ const LatestOrder = ({ data = [], className }) => {
                     )
                 },
             },
+            {
+                Header: 'Seuil',
+                accessor: 'unitPrice',
+                sortable: true,
+                Cell: (props) => {
+                    const { unitPrice } = props.row.original
+                    return (
+                        <NumberFormat
+                            displayType="text"
+                            value={unitPrice}
+                            thousandSeparator={true}
+                        />
+                    )
+                },
+            },
         ],
         []
     )

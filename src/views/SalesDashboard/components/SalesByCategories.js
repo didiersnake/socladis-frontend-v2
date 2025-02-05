@@ -1,13 +1,12 @@
 import React from 'react'
-import { Card, Badge } from 'components/ui'
+import { Card } from 'components/ui'
 import { Chart } from 'components/shared'
-import { COLORS } from 'constants/chart.constant'
 import isEmpty from 'lodash/isEmpty'
 
 const SalesByCategories = ({ data = {} }) => {
     return (
         <Card>
-            <h4>Categories</h4>
+            <h4>Ventes par Marque</h4>
             <div className="mt-6">
                 {!isEmpty(data) && (
                     <>
@@ -16,12 +15,12 @@ const SalesByCategories = ({ data = {} }) => {
                                 (a, b) => a + b,
                                 0
                             )}`}
-                            donutText="Product Sold"
+                            donutText="Packs vendu"
                             series={data.data}
                             customOptions={{ labels: data.labels }}
                             type="donut"
                         />
-                        {data.data.length === data.labels.length && (
+                        {/* {data.data.length === data.labels.length && (
                             <div className="mt-6 grid grid-cols-2 gap-4 max-w-[180px] mx-auto">
                                 {data.labels.map((value, index) => (
                                     <div
@@ -33,13 +32,13 @@ const SalesByCategories = ({ data = {} }) => {
                                                 backgroundColor: COLORS[index],
                                             }}
                                         />
-                                        <span className="font-semibold">
+                                        <span className="font-semibold lowercase">
                                             {value}
                                         </span>
                                     </div>
                                 ))}
                             </div>
-                        )}
+                        )} */}
                     </>
                 )}
             </div>

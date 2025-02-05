@@ -1,13 +1,11 @@
 import React, { useEffect, useMemo } from 'react'
 import { Avatar, Badge } from 'components/ui'
 import { DataTable } from 'components/shared'
-import { HiOutlinePencil } from 'react-icons/hi'
 import { FiPackage } from 'react-icons/fi'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts, setTableData } from '../store/dataSlice'
 import { setSortedColumn } from '../store/stateSlice'
-import useThemeClass from 'utils/hooks/useThemeClass'
-import { useNavigate } from 'react-router-dom'
+
 import cloneDeep from 'lodash/cloneDeep'
 
 const inventoryStatusColor = {
@@ -26,34 +24,6 @@ const inventoryStatusColor = {
         dotClass: 'bg-red-500',
         textClass: 'text-red-500',
     },
-}
-
-const ActionColumn = ({ row }) => {
-    // const dispatch = useDispatch()
-    const { textTheme } = useThemeClass()
-    const navigate = useNavigate()
-
-    const onEdit = () => {
-        navigate(`/app/product-edit/${row._id}`)
-        // console.log(row);
-        
-    }
-
-    // const onDelete = () => {
-    //     dispatch(toggleDeleteConfirmation(true))
-    //     dispatch(setSelectedProduct(row._id))
-    // }
-
-    return (
-        <div className="flex justify-end text-lg">
-            <span
-                className={`cursor-pointer p-2 hover:${textTheme}`}
-                onClick={onEdit}
-            >
-                <HiOutlinePencil />
-            </span>
-        </div>
-    )
 }
 
 const ProductColumn = ({ row }) => {
