@@ -11,7 +11,7 @@ export const getCustomerStatistic = createAsyncThunk(
     'salesProductList/data/getCustomerStatistic',
     async () => {
         const response = await apiGetCrmCustomersStatistic()
-        console.log(response)
+        console.log(response.data)
         return response.data
     }
 )

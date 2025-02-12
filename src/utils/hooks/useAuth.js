@@ -55,7 +55,9 @@ function useAuth() {
             console.log(errors.toString())
             return {
                 status: 'failed',
-                message: errors?.response?.data?.message || errors.toString(),
+                message:
+                    errors?.response?.data?.message ||
+                    'Utilisateur ou mot de passe invalid',
             }
         }
     }

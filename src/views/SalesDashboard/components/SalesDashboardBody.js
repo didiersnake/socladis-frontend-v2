@@ -22,7 +22,7 @@ const SalesDashboardBody = () => {
     useEffect(() => {
         fetchData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [startDate, endDate])
 
     const fetchData = () => {
         const s_date = startDate?.toISOString()
