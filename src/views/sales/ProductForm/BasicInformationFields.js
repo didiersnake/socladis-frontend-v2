@@ -178,11 +178,12 @@ const BasicInformationFields = (props) => {
                                                                           index
                                                                       ].name
                                                               ).sale_price[0][
-                                                                  `${clientCategory}` 
+                                                                  `${clientCategory}`
                                                               ]
-                                                              //To handle bug to set prices
-                                                        const price = cal_price === "semi-grossiste" ? "Semi-grossiste" : cal_price
-                                                          //   console.log(price)
+                                                          //To handle bug to set prices
+                                                          const price =
+                                                              cal_price
+                                                          // console.log(price)
                                                           const total =
                                                               quantity * price
 

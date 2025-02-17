@@ -24,7 +24,7 @@ const ProductNew = () => {
             sale_price: [
                 {
                     grossiste: values.grossiste,
-                    Semi_grossiste: values.Semi_grossiste,
+                    'semi-grossiste': values.Semi_grossiste,
                     detaillant: values.detaillant,
                     random: values.random,
                 },

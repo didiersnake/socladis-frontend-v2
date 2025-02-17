@@ -114,7 +114,11 @@ const ProductForm = forwardRef((props, ref) => {
                                 </div>
                                 <div className="max-h-96 mt-28 grid gap-2">
                                     <UserDetails
-                                        users={suggestions[1]}
+                                        users={
+                                            values.clientName
+                                                ? suggestions[1]
+                                                : []
+                                        }
                                         value={values?.clientName}
                                     />
                                     <PaymentSummary

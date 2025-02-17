@@ -7,6 +7,7 @@ import { getSalesDashboardData } from '../store/dataSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import CustomerStatistic from './CustomerStatistic'
 import Holding from './Holding'
+import StockByCategories from './StockByCategries'
 
 const SalesDashboardBody = () => {
     const dispatch = useDispatch()
@@ -48,6 +49,7 @@ const SalesDashboardBody = () => {
                     data={data?.lowStockList}
                     className="lg:col-span-2"
                 />
+                {/* <StockByCategories data={data?.stockByCategoriesData} /> */}
             </div>
         </Loading>
     )

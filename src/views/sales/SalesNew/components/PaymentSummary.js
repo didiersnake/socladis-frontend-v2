@@ -89,7 +89,7 @@ const PaymentSummary = ({ products, user, inclure_ristourn, inclure_precompte })
 
     return (
         <Card className="">
-            <h5 className="mb-4">Résumé des Facture </h5>
+            <h5 className="mb-4">Résumé de Facture </h5>
             <ul>
                 <PaymentInfo label="TVA" value={data?.VAT_amount} />
                 <PaymentInfo label="Ristourne" value={data?.ristourne} />
