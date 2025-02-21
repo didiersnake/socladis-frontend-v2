@@ -28,7 +28,7 @@ const SalesDashboardBody = () => {
     const fetchData = () => {
         const s_date = startDate?.toISOString()
         const e_date = endDate?.toISOString()
-        dispatch(getSalesDashboardData({ s_date, e_date }))
+        dispatch(getSalesDashboardData({ startDate: s_date, endDate: e_date }))
     }
 
     return (
