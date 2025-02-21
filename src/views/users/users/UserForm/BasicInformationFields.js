@@ -7,7 +7,7 @@ import appConfig from 'configs/app.config'
 
 export const categories = [
     { label: 'Grossiste', value: 'grossiste' },
-    { label: 'Semi Grossiste', value: 'Semi-grossiste' },
+    { label: 'Semi Grossiste', value: 'semi-grossiste' },
     { label: 'Detaillant', value: 'detaillant' },
     { label: 'Random', value: 'random' },
 

@@ -17,10 +17,9 @@ const SalesDashboardHeader = () => {
     const endDate = useSelector((state) => state.salesDashboard.state.endDate)
 
     const handleDateChange = (value) => {
-        dispatch(setStartDate(value[0]))
-        dispatch(setEndDate(value[1]))
-
         if (value[0] && value[1]) {
+            dispatch(setStartDate(value[0]))
+            dispatch(setEndDate(value[1]))
             dispatch(getSalesDashboardData({ startDate, endDate }))
         }
     }
