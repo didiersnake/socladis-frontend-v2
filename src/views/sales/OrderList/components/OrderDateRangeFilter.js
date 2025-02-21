@@ -9,10 +9,8 @@ const OrderDateRangeFilter = () => {
     const tableData = useSelector(
         (state) => state.salesOrderList.data.tableData
     )
-    const startDate = useSelector(
-        (state) => state.salesDashboard.state.startDate
-    )
-    const endDate = useSelector((state) => state.salesDashboard.state.endDate)
+    const startDate = tableData.startDate
+    const endDate = tableData.endDate
     const dispatch = useDispatch()
 
     const dateFormat = 'DD MMM, YYYY'
@@ -26,8 +24,14 @@ const OrderDateRangeFilter = () => {
         const newTableData = cloneDeep(tableData)
         newTableData.startDate = val[0]
         newTableData.endDate = val[1]
+        newTableData.pageIndex = 1
 
         if (val[0] && val[1]) {
+            console.log(
+                new Date(newTableData.startDate).toLocaleDateString('en-GB')
+            )
+            console.log(newTableData.endDate)
+
             fetchData(newTableData)
         }
     }

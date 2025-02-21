@@ -18,14 +18,17 @@ const SalesDashboardHeader = () => {
 
     const handleDateChange = (value) => {
         if (value[0] && value[1]) {
+            // dispatch(getSalesDashboardData({ startDate, endDate }))
             dispatch(setStartDate(value[0]))
             dispatch(setEndDate(value[1]))
-            dispatch(getSalesDashboardData({ startDate, endDate }))
+            // fetchData()
         }
     }
 
-    // const onFilter = () => {
-    //     dispatch(getSalesDashboardData())
+    // const fetchData = () => {
+    //     const s_date = startDate?.toISOString()
+    //     const e_date = endDate?.toISOString()
+    //     dispatch(getSalesDashboardData({ s_date, e_date }))
     // }
 
     return (
