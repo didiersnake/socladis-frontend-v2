@@ -1,6 +1,6 @@
 const appConfig = {
-    apiPrefix: 'http://82.165.212.140:5000',
-    // apiPrefix: 'http://localhost:5500',
+    // apiPrefix: 'http://82.165.212.140:5000',
+    apiPrefix: 'http://localhost:5500',
 
     // apiPrefix: '/api',
     authenticatedUserRoles: ['ADMINISTRATOR', 'EMPLOYEE', 'CLIENT'],

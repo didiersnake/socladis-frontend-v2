@@ -6,6 +6,13 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import OrderDateRangeFilter from './OrderDateRangeFilter'
 
+
+import { injectReducer } from 'store'
+import reducer from 'views/stock/products/ProductList/store'
+// import { getProductsUnpaginated } from 'views/stock/products/ProductList/store/dataSlice'
+
+injectReducer('salesProducts', reducer)
+
 const OrdersTableTools = () => {
     const sales = useSelector((state) => state.salesOrderList.data.orderByRange)
 
@@ -17,18 +24,53 @@ const OrdersTableTools = () => {
         (state) => state.salesOrderList.data.tableData.endDate
     )
 
-    const salesTopic = `Etat des avaris sur la period du
-     ${new Date(startDate).toLocaleDateString()} au ${new Date(endDate).toLocaleDateString()}`
+    const products = useSelector(
+        (state) => state.salesProducts.data.productList
+    )
+
+    const getProductPrice = (prodcutName) => {
+        const product = products.find((el) => el?.name === prodcutName)
+        return Number(product?.unitPrice)
+    }
+
+    const salesTopic =
+        'Etat des avaris sur la period du ' +
+        `${new Date(startDate).toLocaleDateString()} au ${new Date(
+            endDate
+        ).toLocaleDateString()}`
+
     const purchaseExportData = sales?.map((i) => {
         return {
-            Facture: i.invoice_number,
             Nom: i.name,
             Date: new Date(i.date).toLocaleDateString(),
+            "Type d'Avaris": i.type,
             Quantité: i.quantity,
-            "Type d'Avaris" : i.type,
+            'Prix Achat TTC':
+                i.unit_price !== undefined && i.unit_price !== null
+                    ? i.unit_price
+                    : getProductPrice(i?.name),
+            'Total TTC':
+                i.total !== undefined && i.total !== null
+                    ? i.total
+                    : getProductPrice(i?.name) * Number(i.quantity),
         }
     })
-    
+
+    const Total_TTC_Footer = sales?.reduce((acc, curr) => {
+        let total
+        if (
+            curr.total === undefined ||
+            curr.total === null ||
+            curr.total === ' '
+        ) {
+            total = getProductPrice(curr.name) * Number(curr.quantity)
+        } else {
+            total = curr.total
+        }
+        return acc + total
+    }, 0)
+    const footer = 'Total TCC ' + Total_TTC_Footer
+
     const handleSalesExport = (data, topic) => {
         const csvHeader = Object.keys(data[0]).join(';') + '\n'
         const csvRows = data
@@ -36,7 +78,7 @@ const OrdersTableTools = () => {
             .join('\n')
 
         // Add the topic at the top of the file
-        const csvContent = `${topic}\n\n${csvHeader}${csvRows}`
+        const csvContent = `${topic}\n\n${csvHeader}${csvRows}\n\n${footer}`
 
         // Create a blob and trigger download
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })

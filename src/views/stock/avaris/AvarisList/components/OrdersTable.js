@@ -15,6 +15,13 @@ import useThemeClass from 'utils/hooks/useThemeClass'
 import { useNavigate } from 'react-router-dom'
 import cloneDeep from 'lodash/cloneDeep'
 
+
+import { injectReducer } from 'store'
+import reducer from 'views/stock/products/ProductList/store'
+import { getProductsUnpaginated } from 'views/stock/products/ProductList/store/dataSlice'
+
+injectReducer('salesProducts', reducer)
+
 const ActionColumn = ({ row }) => {
     const dispatch = useDispatch()
     const { textTheme } = useThemeClass()
@@ -53,9 +60,8 @@ const ActionColumn = ({ row }) => {
 
 const OrdersTable = () => {
     const dispatch = useDispatch()
-    const { pageIndex, pageSize, sort, query, total, startDate, endDate } = useSelector(
-        (state) => state.salesOrderList.data.tableData
-    )
+    const { pageIndex, pageSize, sort, query, total, startDate, endDate } =
+        useSelector((state) => state.salesOrderList.data.tableData)
     const loading = useSelector((state) => state.salesOrderList.data.loading)
     const data = useSelector((state) => state.salesOrderList.data.orderList)
 
@@ -69,82 +75,125 @@ const OrdersTable = () => {
             getAvaris({ pageIndex, pageSize, sort, query, startDate, endDate })
         )
         dispatch(getAvarisByRange({ startDate, endDate }))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        dispatch(getProductsUnpaginated())
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, pageIndex, pageSize, sort, query, startDate, endDate])
 
     useEffect(() => {
         dispatch(setSelectedRows([]))
         fetchData()
-    }, [dispatch, fetchData, pageIndex, pageSize, sort])
+    }, [])
+
+    const products = useSelector(
+        (state) => state.salesProducts.data.productList
+    )
+
+    const getProductPrice = (prodcutName) => {
+        const product = products.find((el) => el?.name === prodcutName)
+        return Number(product?.unitPrice)
+    }
 
     const tableData = useMemo(
         () => ({ pageIndex, pageSize, sort, query, total, startDate, endDate }),
         [pageIndex, pageSize, sort, query, total, startDate, endDate]
     )
 
-    const columns = React.useMemo(
-        () => [
-            {
-                Header: 'Date',
-                accessor: 'date',
-                sortable: true,
-                Cell: (props) => {
-                    const row = props.row.original
-                    return (
-                        <span>
-                            {new Date(row.date).toLocaleDateString('en-GB')}
-                        </span>
-                    )
-                },
+    const columns = [
+        {
+            Header: 'Date',
+            accessor: 'date',
+            sortable: true,
+            Cell: (props) => {
+                const row = props.row.original
+                return (
+                    <span>
+                        {new Date(row.date).toLocaleDateString('en-GB')}
+                    </span>
+                )
             },
-            {
-                Header: 'Nom du Produit',
-                accessor: 'name',
-                sortable: true,
+        },
+        {
+            Header: 'Nom du Produit',
+            accessor: 'name',
+            sortable: true,
+        },
+        {
+            Header: 'Quantité',
+            accessor: 'quantity',
+            sortable: true,
+        },
+        {
+            Header: "Type d'Avaris",
+            accessor: 'type',
+            sortable: true,
+            Cell: (props) => {
+                const row = props.row.original
+                return <span className="capitalize">{row.type}</span>
             },
-            {
-                Header: 'Quantité',
-                accessor: 'quantity',
-                sortable: true,
+        },
+        {
+            Header: 'Prix Achat TTC',
+            accessor: 'unit_price',
+            sortable: true,
+            Cell: (props) => {
+                const row = props.row.original
+                return (
+                    <span className="capitalize">
+                        {row.unit_price !== undefined &&
+                        row.unit_price !== null &&
+                        row.unit_price !== ''
+                            ? row.unit_price
+                            : getProductPrice(row?.name)}
+                    </span>
+                )
             },
-            {
-                Header: "Type d'Avaris",
-                accessor: 'type',
-                sortable: true,
-                Cell: (props) => {
-                    const row = props.row.original
-                    return <span className="capitalize">{row.type}</span>
-                },
+        },
+        {
+            Header: 'Total TTC',
+            accessor: 'total',
+            sortable: true,
+            Cell: (props) => {
+                const row = props.row.original
+                return (
+                    <span className="capitalize">
+                        {row.total !== undefined &&
+                        row.total !== null &&
+                        row.total !== ''
+                            ? row.total
+                            : getProductPrice(row?.name) * Number(row.quantity)}
+                    </span>
+                )
             },
-            {
-                Header: 'Ajouté Par',
-                accessor: 'createdBy',
-                sortable: true,
-                Cell: (props) => {
-                    const row = props.row.original
-                    return <span className="uppercase">{row?.createdBy}</span>
-                },
+        },
+
+        {
+            Header: 'Ajouté Par',
+            accessor: 'createdBy',
+            sortable: true,
+            Cell: (props) => {
+                const row = props.row.original
+                return <span className="uppercase">{row?.createdBy}</span>
             },
-            {
-                Header: 'Modifé Par',
-                accessor: 'updatedBy',
-                sortable: true,
-                Cell: (props) => {
-                    const row = props.row.original
-                    return <span className="uppercase">{row?.createdBy}</span>
-                },
+        },
+        {
+            Header: 'Modifé Par',
+            accessor: 'updatedBy',
+            sortable: true,
+            Cell: (props) => {
+                const row = props.row.original
+                return <span className="uppercase">{row?.createdBy}</span>
             },
-            {
-                Header: '',
-                id: 'action',
-                accessor: (row) => row,
-                Cell: (props) => <ActionColumn row={props.row.original} />,
-            },
-        ],
-        []
-    )
+        },
+        {
+            Header: '',
+            id: 'action',
+            accessor: (row) => row,
+            Cell: (props) => <ActionColumn row={props.row.original} />,
+        },
+    ]
     // console.log(tableData);
-    
+
     const onPaginationChange = (page) => {
         const newTableData = cloneDeep(tableData)
         newTableData.pageIndex = page

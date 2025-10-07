@@ -74,7 +74,7 @@ const ProductNew = () => {
     }
 
     const handleDiscard = () => {
-        navigate('/app/sales')
+        navigate('/app/damaged')
     }
 
     return (
