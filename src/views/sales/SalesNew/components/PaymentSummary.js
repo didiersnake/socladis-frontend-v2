@@ -33,12 +33,22 @@ export const calculatePaymentBill = (
         0
     )
 
-    const ristourn =
-     !inclure_ristourn ? 0 :user?.category !== 'random'
-            ? 100 * products?.reduce(
-        (acc, curr) => acc + Number(curr.quantity),
-        0
-    ): 0
+    const calculateRistourn = (products) => {
+        let ristourneArray = products.map((el) =>
+            // if product startswith mux then ristourne is 300
+            el?.name.startsWith('MUX')
+                ? Number(el?.quantity * 300)
+                : Number(el?.quantity * 100)
+        )
+        return ristourneArray.reduce((acc, curr) => acc + curr, 0)
+    }
+    const ristourn = !inclure_ristourn
+        ? 0
+        : user?.category !== 'random'
+        ? calculateRistourn(products)
+        : 0
+
+
     const VAT_amount = (total_without_tax * 0.1925)
     const withdrawal_amountCal = () => {
         let result 

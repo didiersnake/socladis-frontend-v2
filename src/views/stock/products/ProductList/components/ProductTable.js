@@ -152,7 +152,7 @@ const ProductTable = () => {
             //     },
             // },
             {
-                Header: 'Seuil',
+                Header: 'Prix Achat TTC',
                 accessor: 'unitPrice',
                 sortable: true,
                 Cell: (props) => {

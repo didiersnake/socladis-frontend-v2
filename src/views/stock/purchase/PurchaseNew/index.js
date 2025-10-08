@@ -73,7 +73,7 @@ const ProductNew = () => {
     }
 
     const handleDiscard = () => {
-        navigate('/app/sales')
+        navigate('/app/supply')
     }
 
     return (

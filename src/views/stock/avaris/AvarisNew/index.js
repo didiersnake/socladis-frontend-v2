@@ -28,31 +28,40 @@ const ProductNew = () => {
     )
     const createdBy = useSelector((state) => state.auth.user.name)
 
-    // console.log(products);   
-    
-    const loading = useSelector(
-        (state) => state.salesProducts.data.loading
-    )
+    // console.log(products);
 
-    const fetchData = ()=> {
+    const loading = useSelector((state) => state.salesProducts.data.loading)
+
+    const fetchData = () => {
         dispatch(getProductsUnpaginated())
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleFormSubmit = async (values, setSubmitting) => {
+        const productPrice = () => {
+            return products.find((el) => el?.name === values.name)?.unitPrice
+        }
+
         setSubmitting(true)
         const data = {
             name: values.name,
             quantity: values.quantity,
+            unit_price: productPrice(),
+            total: (
+                Number(values.quantity) * Number(productPrice())
+            ).toString(),
             date: new Date(values.date).toISOString(),
             type: values.type,
             createdBy: createdBy,
             updatedBy: createdBy,
         }
+
+        console.log(data)
+
         const success = await addProduct(data)
         setSubmitting(false)
         if (success) {
@@ -70,7 +79,6 @@ const ProductNew = () => {
             )
             navigate('/app/damaged')
         }
-        
     }
 
     const handleDiscard = () => {

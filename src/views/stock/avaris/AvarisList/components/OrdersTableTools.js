@@ -42,7 +42,7 @@ const OrdersTableTools = () => {
     const purchaseExportData = sales?.map((i) => {
         return {
             Nom: i.name,
-            Date: new Date(i.date).toLocaleDateString(),
+            Date: new Date(i.date).toLocaleDateString('en-GB'),
             "Type d'Avaris": i.type,
             Quantité: i.quantity,
             'Prix Achat TTC':
@@ -65,7 +65,7 @@ const OrdersTableTools = () => {
         ) {
             total = getProductPrice(curr.name) * Number(curr.quantity)
         } else {
-            total = curr.total
+            total = Number(curr.total)
         }
         return acc + total
     }, 0)

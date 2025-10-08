@@ -95,7 +95,7 @@ const BasicInformationFields = (props) => {
                 </Field>
             </FormItem>
             <FormItem
-                label="Seuil de Stock"
+                label="Prix Achat TTC"
                 invalid={errors.unitPrice && touched.unitPrice}
                 errorMessage={errors.unitPrice}
             >
