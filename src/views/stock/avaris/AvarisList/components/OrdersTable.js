@@ -68,7 +68,7 @@ const OrdersTable = () => {
     const s_date = startDate?.toISOString()
     const e_date = endDate?.toISOString()
     // console.log(s_date)
-    const fetchData = useCallback(() => {
+    const fetchData = () => {
         let startDate = s_date
         let endDate = e_date
         dispatch(
@@ -78,12 +78,12 @@ const OrdersTable = () => {
         dispatch(getProductsUnpaginated())
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch, pageIndex, pageSize, sort, query, startDate, endDate])
+    }
 
     useEffect(() => {
-        dispatch(setSelectedRows([]))
+        // dispatch(setSelectedRows([]))
         fetchData()
-    }, [])
+    }, [pageIndex, pageSize, sort, query, startDate, endDate])
 
     const products = useSelector(
         (state) => state.salesProducts.data.productList
